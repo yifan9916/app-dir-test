@@ -1,5 +1,6 @@
 'use client';
-import styles from './carousel.module.css';
+
+import styles from './slider.module.css';
 
 import { CSSProperties, ElementRef, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
@@ -20,7 +21,7 @@ type Props = {
   onSlideClick?: (item: Episode) => void;
 };
 
-export const Carousel = (props: Props) => {
+export const Slider = (props: Props) => {
   const { items, onSlideClick } = props;
 
   const sliderRef = useRef<ElementRef<'div'>>(null);

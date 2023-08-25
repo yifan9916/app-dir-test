@@ -1,6 +1,6 @@
 'use client';
 
-import { Carousel, Episode } from '../carousel/carousel';
+import { Slider, Episode } from '../slider/slider';
 
 type Props = {
   episodes: Episode[];
@@ -15,7 +15,7 @@ export const EpisodeSection = (props: Props) => {
 
   return (
     <div className="px-4">
-      <Carousel items={episodes} onSlideClick={handleSlideClick} />
+      <Slider items={episodes} onSlideClick={handleSlideClick} />
     </div>
   );
 };
