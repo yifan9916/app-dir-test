@@ -1,0 +1,20 @@
+.slider {
+  --slides-per-screen: 2;
+  --item-size: calc(100% / var(--slides-per-screen));
+
+  @media (min-width: 768px) {
+    --slides-per-screen: 4;
+  }
+
+  @media (min-width: 1280px) {
+    --slides-per-screen: 5;
+  }
+}
+
+.slides {
+  transform: translate3d(calc(var(--item-index) * var(--item-size) * -1), 0, 0);
+}
+
+.slide {
+  flex-basis: calc(100% / var(--slides-per-screen));
+}
