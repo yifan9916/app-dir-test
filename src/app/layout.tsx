@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 
 type Props = {
   children: React.ReactNode;
+  panel: React.ReactNode;
 };
 
 const inter = Inter({ subsets: ['latin'] });
@@ -15,11 +16,14 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout(props: Props) {
-  const { children } = props;
+  const { children, panel } = props;
 
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {panel}
+        {children}
+      </body>
     </html>
   );
 }
