@@ -20,9 +20,9 @@ export default function RootLayout(props: Props) {
 
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {panel}
+      <body className={`${inter.className} flex`}>
         {children}
+        {panel}
       </body>
     </html>
   );
