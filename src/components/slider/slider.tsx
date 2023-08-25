@@ -99,9 +99,7 @@ const Slide = (props: SlideProps) => {
         height={1080}
         className="mb-4 aspect-video w-full object-cover"
       />
-      <h3 className="mb-1 font-bold">
-        {item.title} - {item.id}
-      </h3>
+      <h3 className="mb-1 font-bold">{item.title}</h3>
       <p className="h-12 overflow-hidden break-all">{item.plot}</p>
     </Link>
   );
