@@ -4,6 +4,7 @@ import styles from './slider.module.css';
 
 import { CSSProperties, ElementRef, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 // TODO make carousel generic
 export type Episode = {
@@ -18,11 +19,10 @@ export type Episode = {
 
 type Props = {
   items: Episode[];
-  onSlideClick?: (item: Episode) => void;
 };
 
 export const Slider = (props: Props) => {
-  const { items, onSlideClick } = props;
+  const { items } = props;
 
   const sliderRef = useRef<ElementRef<'div'>>(null);
   const [itemIndex, setItemIndex] = useState(0);
@@ -68,7 +68,7 @@ export const Slider = (props: Props) => {
     >
       <div className={`${styles.slides} flex text-white transition-transform`}>
         {items.map((item) => (
-          <Slide key={item.id} item={item} onSlideClick={onSlideClick} />
+          <Slide key={item.id} item={item} />
         ))}
       </div>
 
@@ -82,21 +82,15 @@ export const Slider = (props: Props) => {
 
 type SlideProps = {
   item: Episode;
-  onSlideClick?: (item: Episode) => void;
 };
 
 const Slide = (props: SlideProps) => {
-  const { item, onSlideClick } = props;
-  const handleSlideClick = (item: Episode) => {
-    if (!onSlideClick) return;
-
-    onSlideClick(item);
-  };
+  const { item } = props;
 
   return (
-    <div
+    <Link
+      href={`/episode/${item.id}`}
       className={`${styles.slide} shrink-0 grow-0 pr-4`}
-      onClick={() => handleSlideClick(item)}
     >
       <Image
         src={item.img}
@@ -105,8 +99,10 @@ const Slide = (props: SlideProps) => {
         height={1080}
         className="mb-4 aspect-video w-full object-cover"
       />
-      <h3 className="mb-1 font-bold">{item.title}</h3>
+      <h3 className="mb-1 font-bold">
+        {item.title} - {item.id}
+      </h3>
       <p className="h-12 overflow-hidden break-all">{item.plot}</p>
-    </div>
+    </Link>
   );
 };
