@@ -21,7 +21,7 @@ export default async function Page(props: Props) {
         alt={episode.plot}
         height={1920}
         width={1080}
-        className="flex-1 object-cover"
+        className="max-h-[66vh] w-full object-cover"
       />
 
       <div>
