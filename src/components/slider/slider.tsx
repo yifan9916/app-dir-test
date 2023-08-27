@@ -5,6 +5,7 @@ import styles from './slider.module.css';
 import { CSSProperties, ElementRef, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Arrow } from '../icons';
 
 // TODO make carousel generic
 export type Episode = {
@@ -60,6 +61,8 @@ export const Slider = (props: Props) => {
     setItemIndex(newIndex);
   };
 
+  const TODOgreyoutarrow = '';
+
   return (
     <div
       className={`${styles.slider} h-full w-full`}
@@ -72,9 +75,16 @@ export const Slider = (props: Props) => {
         ))}
       </div>
 
-      <div className="flex justify-end p-8 text-white">
-        <button onClick={handleSlideLeft}>Left</button>
-        <button onClick={handleSlideRight}>Right</button>
+      <div className="flex justify-end p-4 text-white">
+        <button onClick={handleSlideLeft}>
+          <Arrow
+            style={{ transform: 'scaleX(-1)' }}
+            className={`mr-4${TODOgreyoutarrow}`}
+          />
+        </button>
+        <button onClick={handleSlideRight}>
+          <Arrow />
+        </button>
       </div>
     </div>
   );
@@ -92,15 +102,20 @@ const Slide = (props: SlideProps) => {
       href={`/episode/${item.id}`}
       className={`${styles.slide} shrink-0 grow-0 pr-4`}
     >
+      <div className="absolute w-7 h-7 bg-white flex justify-center items-center text-black font-bold">
+        {item.episode}
+      </div>
       <Image
         src={item.img}
         alt={item.plot}
         width={1920}
         height={1080}
-        className="mb-4 aspect-video w-full object-cover"
+        className="mb-4 aspect-[3/2] w-full object-cover"
       />
-      <h3 className="mb-1 font-bold">{item.title}</h3>
-      <p className="h-12 overflow-hidden break-all">{item.plot}</p>
+      <h3 className="mb-2 font-bold text-ellipsis overflow-hidden whitespace-nowrap">
+        {item.title}
+      </h3>
+      <p className="max-h-[3rem] overflow-hidden text-xs">{item.plot}</p>
     </Link>
   );
 };

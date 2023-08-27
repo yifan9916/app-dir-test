@@ -6,15 +6,17 @@
     --slides-per-screen: 3;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1280px) {
     --slides-per-screen: 4;
   }
 }
 
 .slides {
+  /* translate 3D > translate 2D for hardware accelerated rendering */
   transform: translate3d(calc(var(--item-index) * var(--item-size) * -1), 0, 0);
 }
 
 .slide {
   flex-basis: calc(100% / var(--slides-per-screen));
+  max-width: calc(100% / var(--slides-per-screen));
 }
