@@ -2,10 +2,12 @@
 
 import styles from './slider.module.css';
 
-import { CSSProperties, ElementRef, useEffect, useRef, useState } from 'react';
+import { CSSProperties, ElementRef, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { Arrow } from '../icons';
+import { useSlider } from './use-slider';
 
 // TODO make carousel generic
 export type Episode = {
@@ -26,47 +28,24 @@ export const Slider = (props: Props) => {
   const { items } = props;
 
   const sliderRef = useRef<ElementRef<'div'>>(null);
-  const [itemIndex, setItemIndex] = useState(0);
-  const [itemsPerScreen, setItemsPerScreen] = useState(2);
-
-  const totalItemsCount = items.length;
-  const lastItemIndex = items.length - 1;
-
-  useEffect(() => {
-    if (!sliderRef.current) return;
-
-    const styleValue = parseInt(
-      getComputedStyle(sliderRef.current).getPropertyValue(
-        '--slides-per-screen'
-      ),
-      10
-    );
-
-    setItemsPerScreen(styleValue);
-  }, []);
+  const { state, dispatch } = useSlider<Episode>(items, sliderRef);
 
   const handleSlideLeft = () => {
-    if (itemIndex === 0) return;
-
-    const nextIndex = itemIndex - itemsPerScreen;
-    const newIndex = nextIndex <= 0 ? 0 : nextIndex;
-    setItemIndex(newIndex);
+    dispatch({ type: 'slide_left' });
   };
 
   const handleSlideRight = () => {
-    if (itemIndex >= lastItemIndex) return;
-
-    const nextIndex = itemIndex + itemsPerScreen;
-    const newIndex = nextIndex >= totalItemsCount ? lastItemIndex : nextIndex;
-    setItemIndex(newIndex);
+    dispatch({ type: 'slide_right' });
   };
 
-  const TODOgreyoutarrow = '';
+  // TODO style disabled attribute with tailwind
+  const arrowClassLeft = state.isAtBeginning ? ' text-gray-400' : '';
+  const arrowClassRight = state.isAtEnd ? ' text-gray-400' : '';
 
   return (
     <div
       className={`${styles.slider} h-full w-full`}
-      style={{ '--item-index': itemIndex } as CSSProperties}
+      style={{ '--item-index': state.currentSlideIndex } as CSSProperties}
       ref={sliderRef}
     >
       <div className={`${styles.slides} flex text-white transition-transform`}>
@@ -76,14 +55,14 @@ export const Slider = (props: Props) => {
       </div>
 
       <div className="flex justify-end p-4 text-white">
-        <button onClick={handleSlideLeft}>
+        <button onClick={handleSlideLeft} disabled={state.isAtBeginning}>
           <Arrow
             style={{ transform: 'scaleX(-1)' }}
-            className={`mr-4${TODOgreyoutarrow}`}
+            className={`mr-4${arrowClassLeft}`}
           />
         </button>
-        <button onClick={handleSlideRight}>
-          <Arrow />
+        <button onClick={handleSlideRight} disabled={state.isAtEnd}>
+          <Arrow className={arrowClassRight} />
         </button>
       </div>
     </div>
