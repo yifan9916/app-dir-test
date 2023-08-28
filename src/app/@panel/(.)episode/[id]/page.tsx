@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import * as Omdb from '@/libs/omdb-api';
 import { Star } from '@/components/icons';
+import { BackButton } from '@/components/back-button/back-button';
 
 // TODO close modal/route back to overview page when clicking outside of the episode card
 
@@ -22,6 +23,9 @@ export default async function Page(props: Props) {
 
   return (
     <div className="absolute z-10 h-screen w-screen p-4 bg-[rgba(0,0,0,0.7)] lg:relative lg:p-0 lg:bg-none lg:basis-1/3 lg:grow-0 lg:shrink-0">
+      <div className="absolute text-white p-2 lg:hidden">
+        <BackButton />
+      </div>
       <div className="rounded bg-white h-full w-full max-w-2xl lg:rounded-none mx-auto flex flex-col">
         <Image
           src={episode.img}

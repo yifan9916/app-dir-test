@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import * as Omdb from '@/libs/omdb-api';
 import { Star } from '@/components/icons';
+import { BackButton } from '@/components/back-button/back-button';
 
 type Props = {
   params: {
@@ -17,6 +18,9 @@ export default async function Page(props: Props) {
 
   return (
     <div className="bg-white max-w-2xl mx-auto">
+      <div className="absolute text-white p-2">
+        <BackButton />
+      </div>
       <Image
         src={episode.img}
         alt={episode.plot}
@@ -26,7 +30,6 @@ export default async function Page(props: Props) {
         priority
         className="w-full object-cover aspect-video"
       />
-
       <div>
         <div className="flex justify-between border-b p-5 items-end xl:p-10">
           <span>
