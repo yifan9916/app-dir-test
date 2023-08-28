@@ -19,16 +19,16 @@ export default async function Page(props: Props) {
 
   return (
     <div className="absolute z-10 h-screen w-screen p-4 bg-[rgba(0,0,0,0.7)] lg:relative lg:p-0 lg:bg-none lg:basis-1/3 lg:grow-0 lg:shrink-0">
-      <div className="rounded overflow-scroll bg-white h-full w-full max-w-2xl lg:rounded-none mx-auto">
+      <div className="rounded bg-white h-full w-full max-w-2xl lg:rounded-none mx-auto flex flex-col">
         <Image
           src={episode.img}
           alt={episode.plot}
           height={1920}
           width={1080}
-          className="max-h-[66vh] w-full object-cover aspect-[5/4] md:aspect-[16/9] lg:aspect-[5/4]"
+          className="w-full object-cover flex lg:basis-[65vh] lg:max-h-[65vh] grow-1 shrink-1"
         />
 
-        <div>
+        <div className="lg:h-[35vh] overflow-scroll">
           <div className="flex justify-between border-b p-5 items-end xl:p-10">
             <span>
               Episode {episode.episode} — {episode.releaseDate}

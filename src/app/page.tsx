@@ -11,18 +11,18 @@ export default async function Home() {
 
   return (
     <main
-      className="bg-slate-500 flex min-h-screen flex-col bg-cover bg-center bg-no-repeat justify-end overflow-x-hidden"
+      className="bg-slate-500 flex h-screen flex-col bg-cover bg-center bg-no-repeat justify-end overflow-x-hidden"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2),rgba(0,0,0,0.8)),url('${seriesData.Poster}')`,
       }}
     >
-      <div className="px-4 pb-10 xl:pb-28 text-white xl:pl-24 xl:max-w-2xl">
+      <div className="px-4 py-10 xl:pb-28 text-white xl:pl-24 xl:max-w-2xl">
         <p className="mb-2 text-2xl">Season {seasonData.Season}</p>
         <h1 className="mb-1 text-6xl font-bold">{seriesData.Title}</h1>
         <p className="text-xl">{seriesData.Plot}</p>
       </div>
 
-      <EpisodeSection episodes={episodes} />
+      {episodes && <EpisodeSection episodes={episodes} />}
     </main>
   );
 }

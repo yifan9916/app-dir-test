@@ -32,7 +32,7 @@ export const Arrow = (props: SVGProps<SVGSVGElement>) => {
       <path
         d="M19.5 1.5L28.5 10.5L19.5 19.5"
         stroke="currentColor"
-        stroke-linecap="square"
+        strokeLinecap="square"
       />
     </svg>
   );

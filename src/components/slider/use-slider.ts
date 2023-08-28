@@ -1,7 +1,6 @@
 import { RefObject, useEffect, useReducer } from 'react';
 
 type SliderState = {
-  // static
   slidesPerScreen: number;
   totalSlides: number;
   maxSlideIndex: number;
@@ -12,6 +11,7 @@ type SliderState = {
 };
 
 type SliderAction =
+  | { type: 'update_slider'; payload: number }
   | { type: 'set_slides_per_screen'; payload: number }
   | {
       type: 'slide_left';
@@ -33,6 +33,18 @@ export const reducer = (
   action: SliderAction
 ): SliderState => {
   switch (action.type) {
+    case 'update_slider': {
+      const newTotalSLides = action.payload;
+
+      return {
+        slidesPerScreen: state.slidesPerScreen,
+        currentSlideIndex: 0,
+        totalSlides: newTotalSLides,
+        maxSlideIndex: newTotalSLides - 1,
+        isAtBeginning: true,
+        isAtEnd: false,
+      };
+    }
     case 'set_slides_per_screen': {
       return { ...state, slidesPerScreen: action.payload };
     }
@@ -72,9 +84,9 @@ export const reducer = (
   }
 };
 
-export const useSlider = <T>(
-  items: Array<T>,
-  sliderRef: RefObject<HTMLDivElement>
+export const useSlider = (
+  sliderRef: RefObject<HTMLDivElement>,
+  items: Array<any>
 ) => {
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
@@ -94,6 +106,10 @@ export const useSlider = <T>(
 
     dispatch({ type: 'set_slides_per_screen', payload: styleValue });
   }, [sliderRef]);
+
+  useEffect(() => {
+    dispatch({ type: 'update_slider', payload: items.length });
+  }, [items]);
 
   return {
     state,

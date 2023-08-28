@@ -28,7 +28,7 @@ export const Slider = (props: Props) => {
   const { items } = props;
 
   const sliderRef = useRef<ElementRef<'div'>>(null);
-  const { state, dispatch } = useSlider<Episode>(items, sliderRef);
+  const { state, dispatch } = useSlider(sliderRef, items);
 
   const handleSlideLeft = () => {
     dispatch({ type: 'slide_left' });
@@ -38,31 +38,34 @@ export const Slider = (props: Props) => {
     dispatch({ type: 'slide_right' });
   };
 
-  // TODO style disabled attribute with tailwind
-  const arrowClassLeft = state.isAtBeginning ? ' text-gray-400' : '';
-  const arrowClassRight = state.isAtEnd ? ' text-gray-400' : '';
-
   return (
     <div
-      className={`${styles.slider} h-full w-full`}
+      className={`${styles.slider} h-full w-full flex flex-col justify-between`}
       style={{ '--item-index': state.currentSlideIndex } as CSSProperties}
       ref={sliderRef}
     >
-      <div className={`${styles.slides} flex text-white transition-transform`}>
+      <div
+        className={`${styles.slides} flex text-white transition-transform mb-6`}
+      >
         {items.map((item) => (
           <Slide key={item.id} item={item} />
         ))}
       </div>
 
-      <div className="flex justify-end p-4 text-white">
-        <button onClick={handleSlideLeft} disabled={state.isAtBeginning}>
-          <Arrow
-            style={{ transform: 'scaleX(-1)' }}
-            className={`mr-4${arrowClassLeft}`}
-          />
+      <div className="flex justify-end pr-5 text-white pb-7">
+        <button
+          onClick={handleSlideLeft}
+          disabled={state.isAtBeginning}
+          className="disabled:text-gray-400"
+        >
+          <Arrow style={{ transform: 'scaleX(-1)' }} className="mr-4" />
         </button>
-        <button onClick={handleSlideRight} disabled={state.isAtEnd}>
-          <Arrow className={arrowClassRight} />
+        <button
+          onClick={handleSlideRight}
+          disabled={state.isAtEnd}
+          className="disabled:text-gray-400"
+        >
+          <Arrow />
         </button>
       </div>
     </div>
@@ -79,17 +82,18 @@ const Slide = (props: SlideProps) => {
   return (
     <Link
       href={`/episode/${item.id}`}
-      className={`${styles.slide} shrink-0 grow-0 pr-4`}
+      className={`${styles.slide} shrink-0 grow-0 pr-6`}
     >
       <div className="absolute w-7 h-7 bg-white flex justify-center items-center text-black font-bold">
         {item.episode}
       </div>
+
       <Image
         src={item.img}
         alt={item.plot}
         width={1920}
         height={1080}
-        className="mb-4 aspect-[3/2] w-full object-cover"
+        className="mb-5 aspect-[3/2] w-full object-cover"
       />
       <h3 className="mb-2 font-bold text-ellipsis overflow-hidden whitespace-nowrap">
         {item.title}
