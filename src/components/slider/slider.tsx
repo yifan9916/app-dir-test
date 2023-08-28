@@ -47,8 +47,12 @@ export const Slider = (props: Props) => {
       <div
         className={`${styles.slides} flex text-white transition-transform mb-6`}
       >
-        {items.map((item) => (
-          <Slide key={item.id} item={item} />
+        {items.map((item, index) => (
+          <Slide
+            key={item.id}
+            item={item}
+            isPriority={index <= state.slidesPerScreen}
+          />
         ))}
       </div>
 
@@ -76,10 +80,11 @@ export const Slider = (props: Props) => {
 
 type SlideProps = {
   item: Episode;
+  isPriority?: boolean;
 };
 
 const Slide = (props: SlideProps) => {
-  const { item } = props;
+  const { item, isPriority } = props;
 
   return (
     <Link
@@ -96,6 +101,8 @@ const Slide = (props: SlideProps) => {
         width={1920}
         height={1080}
         className="mb-5 aspect-[3/2] w-full object-cover"
+        quality={100}
+        priority={isPriority}
       />
       <h3 className="mb-2 font-bold text-ellipsis overflow-hidden whitespace-nowrap">
         {item.title}
