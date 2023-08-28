@@ -1,3 +1,22 @@
+export type OMDBSearchResultsError = {
+  Response: string;
+  Error: string;
+};
+
+type SearchResult = {
+  Title: string;
+  Year: string;
+  imdbID: string;
+  Type: string;
+  Poster: string;
+};
+
+export type OMDBSearchResults = {
+  Response: string;
+  Search: SearchResult[];
+  totalResults: string | number;
+};
+
 type Rating = {
   Source: string;
   Value: string;

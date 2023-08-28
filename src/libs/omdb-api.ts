@@ -1,4 +1,9 @@
-import { OMDBEpisode, OMDBEpisodes, OMDBSeries } from './types';
+import {
+  OMDBEpisode,
+  OMDBEpisodes,
+  OMDBSearchResults,
+  OMDBSeries,
+} from './types';
 
 type Episode = {
   id: string;
@@ -22,6 +27,18 @@ const apiKey = process.env.OMDB_API_KEY;
 // http://www.omdbapi.com/?apikey=6177d11e&i=tt5743796&season=1&episode=1
 
 const baseUrl = `http://www.omdbapi.com/?apikey=${apiKey}`;
+
+export const fetchSearchTerm = async (
+  searchTerm: string
+): Promise<OMDBSearchResults['Search']> => {
+  const res = await fetch(`/api/omdb/series?search=${searchTerm}`);
+
+  if (!res.ok) {
+    throw new Error(`Failed to fetch data for search term: ${searchTerm}`);
+  }
+
+  return res.json();
+};
 
 export const fetchSeriesByTitle = async (
   title = 'warrior'

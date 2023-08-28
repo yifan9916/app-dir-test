@@ -3,13 +3,16 @@ import Image from 'next/image';
 import * as Omdb from '@/libs/omdb-api';
 import { Star } from '@/components/icons';
 
+// TODO close modal/route back to overview page when clicking outside of the episode card
+
+// BUG: there seems to be an issue with closing parallel + intercepted route modals
+// https://github.com/vercel/next.js/issues/49662
+
 type Props = {
   params: {
     id: string;
   };
 };
-
-// TODO close modal/route back to overview page when clicking outside of the episode card
 
 export default async function Page(props: Props) {
   const { params } = props;
