@@ -40,7 +40,7 @@ export const Slider = (props: Props) => {
 
   return (
     <div
-      className={`${styles.slider} h-full w-full flex flex-col justify-between`}
+      className={`${styles.slider} h-full w-full flex flex-col`}
       style={{ '--item-index': state.currentSlideIndex } as CSSProperties}
       ref={sliderRef}
     >
