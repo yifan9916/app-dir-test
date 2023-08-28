@@ -42,7 +42,7 @@ export default async function Page(props: Props) {
           </div>
 
           <div className="p-5 xl:p-10">
-            <h1 className="mb-2 text-2xl font-bold">{episode.title}</h1>
+            <h2 className="mb-2 text-2xl font-bold">{episode.title}</h2>
             <p>{episode.plot}</p>
           </div>
         </div>

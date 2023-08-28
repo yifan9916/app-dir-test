@@ -54,6 +54,7 @@ export const Slider = (props: Props) => {
 
       <div className="flex justify-end pr-5 text-white pb-7">
         <button
+          aria-label="Slide Left"
           onClick={handleSlideLeft}
           disabled={state.isAtBeginning}
           className="disabled:text-gray-400"
@@ -61,6 +62,7 @@ export const Slider = (props: Props) => {
           <Arrow style={{ transform: 'scaleX(-1)' }} className="mr-4" />
         </button>
         <button
+          aria-label="Slide Right"
           onClick={handleSlideRight}
           disabled={state.isAtEnd}
           className="disabled:text-gray-400"
