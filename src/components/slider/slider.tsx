@@ -100,9 +100,9 @@ const Slide = (props: SlideProps) => {
         alt={item.plot}
         width={1920}
         height={1080}
-        className="mb-5 aspect-[3/2] w-full object-cover"
         quality={100}
         priority={isPriority}
+        className="mb-5 aspect-[3/2] w-full object-cover"
       />
       <h3 className="mb-2 font-bold text-ellipsis overflow-hidden whitespace-nowrap">
         {item.title}

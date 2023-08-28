@@ -28,6 +28,8 @@ export default async function Page(props: Props) {
           alt={episode.plot}
           height={1920}
           width={1080}
+          quality={100}
+          priority
           className="w-full object-cover flex lg:basis-[65vh] lg:max-h-[65vh] grow-1 shrink-1"
         />
 

@@ -22,6 +22,8 @@ export default async function Page(props: Props) {
         alt={episode.plot}
         height={1920}
         width={1080}
+        quality={100}
+        priority
         className="w-full object-cover aspect-video"
       />
 
