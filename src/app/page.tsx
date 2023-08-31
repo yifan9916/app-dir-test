@@ -6,7 +6,7 @@ export default async function Home() {
   const seriesData = await Omdb.fetchSeriesById(seriesId);
   const seasonData = await Omdb.fetchSeasonEpisodes(1, seriesId);
   const { episodes } = await await Omdb.fetchAllEpisodeDetails(
-    seasonData.Episodes
+    seasonData.Episodes,
   );
 
   // main needs to be a separate client component to enable both server rendering and client updates

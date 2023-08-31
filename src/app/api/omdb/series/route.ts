@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const search = searchParams.get('search');
 
   const res = await fetch(
-    `http://www.omdbapi.com/?apikey=${apiKey}&s=${search}`
+    `http://www.omdbapi.com/?apikey=${apiKey}&s=${search}`,
   );
 
   if (!res.ok) {

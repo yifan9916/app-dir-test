@@ -22,11 +22,11 @@ export default async function Page(props: Props) {
   const episode = Omdb.processEpisode(omdbEpisode);
 
   return (
-    <div className="absolute z-10 h-screen w-screen p-4 bg-[rgba(0,0,0,0.7)] lg:relative lg:p-0 lg:bg-none lg:basis-1/3 lg:grow-0 lg:shrink-0">
-      <div className="absolute text-white p-2 lg:hidden">
+    <div className="absolute z-10 h-screen w-screen bg-[rgba(0,0,0,0.7)] p-4 lg:relative lg:shrink-0 lg:grow-0 lg:basis-1/3 lg:bg-none lg:p-0">
+      <div className="absolute p-2 text-white lg:hidden">
         <BackButton />
       </div>
-      <div className="rounded bg-white h-full w-full max-w-2xl lg:max-w-none lg:rounded-none mx-auto flex flex-col overflow-hidden">
+      <div className="mx-auto flex h-full w-full max-w-2xl flex-col overflow-hidden rounded bg-white lg:max-w-none lg:rounded-none">
         <Image
           src={episode.img}
           alt={episode.plot}
@@ -34,11 +34,11 @@ export default async function Page(props: Props) {
           width={1080}
           quality={100}
           priority
-          className="w-full object-cover flex lg:basis-[65vh] lg:max-h-[65vh] grow-1 shrink-1"
+          className="grow-1 shrink-1 flex w-full object-cover lg:max-h-[65vh] lg:basis-[65vh]"
         />
 
-        <div className="lg:h-[35vh] overflow-scroll">
-          <div className="flex justify-between border-b p-5 items-end xl:p-10">
+        <div className="overflow-scroll lg:h-[35vh]">
+          <div className="flex items-end justify-between border-b p-5 xl:p-10">
             <span>
               Episode {episode.episode} — {episode.releaseDate}
             </span>{' '}

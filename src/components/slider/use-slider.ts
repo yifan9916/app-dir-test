@@ -30,7 +30,7 @@ export const initialState: SliderState = {
 
 export const reducer = (
   state: SliderState,
-  action: SliderAction
+  action: SliderAction,
 ): SliderState => {
   switch (action.type) {
     case 'update_slider': {
@@ -86,7 +86,7 @@ export const reducer = (
 
 export const useSlider = (
   sliderRef: RefObject<HTMLDivElement>,
-  items: Array<any>
+  items: Array<any>,
 ) => {
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
@@ -99,9 +99,9 @@ export const useSlider = (
 
     const styleValue = parseInt(
       getComputedStyle(sliderRef.current).getPropertyValue(
-        '--slides-per-screen'
+        '--slides-per-screen',
       ),
-      10
+      10,
     );
 
     dispatch({ type: 'set_slides_per_screen', payload: styleValue });

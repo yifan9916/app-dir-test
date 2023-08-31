@@ -29,7 +29,7 @@ const apiKey = process.env.OMDB_API_KEY;
 const baseUrl = `http://www.omdbapi.com/?apikey=${apiKey}`;
 
 export const fetchSearchTerm = async (
-  searchTerm: string
+  searchTerm: string,
 ): Promise<OMDBSearchResults['Search']> => {
   const res = await fetch(`/api/omdb/series?search=${searchTerm}`);
 
@@ -41,7 +41,7 @@ export const fetchSearchTerm = async (
 };
 
 export const fetchSeriesByTitle = async (
-  title = 'warrior'
+  title = 'warrior',
 ): Promise<OMDBSeries> => {
   const res = await fetch(`${baseUrl}&t=${title}`);
 
@@ -53,7 +53,7 @@ export const fetchSeriesByTitle = async (
 };
 
 export const fetchSeriesById = async (
-  id = 'tt5743796'
+  id = 'tt5743796',
 ): Promise<OMDBSeries> => {
   const res = await fetch(`${baseUrl}&i=${id}`);
 
@@ -66,7 +66,7 @@ export const fetchSeriesById = async (
 
 export const fetchSeasonEpisodes = async (
   seasonNumber: number = 1,
-  id: string = 'tt5743796'
+  id: string = 'tt5743796',
 ): Promise<OMDBEpisodes> => {
   const res = await fetch(`${baseUrl}&i=${id}&season=${seasonNumber}`);
 
@@ -100,7 +100,7 @@ export const fetchEpisodeById = async (id: string): Promise<OMDBEpisode> => {
 };
 
 export const fetchAllEpisodeDetails = async (
-  omdbEpisodes: OMDBEpisodes['Episodes']
+  omdbEpisodes: OMDBEpisodes['Episodes'],
 ) => {
   const processedEpisodes = omdbEpisodes.map(async (episode) => {
     const omdbEpisode = await fetchEpisodeById(episode.imdbID);
@@ -112,7 +112,7 @@ export const fetchAllEpisodeDetails = async (
   const errors = results.filter((r) => r.status === 'rejected');
   const values = results
     .filter(
-      (r): r is PromiseFulfilledResult<Episode> => r.status === 'fulfilled'
+      (r): r is PromiseFulfilledResult<Episode> => r.status === 'fulfilled',
     )
     .map((r) => r.value);
 

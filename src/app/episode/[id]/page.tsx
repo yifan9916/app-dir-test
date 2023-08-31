@@ -17,8 +17,8 @@ export default async function Page(props: Props) {
   const episode = Omdb.processEpisode(omdbEpisode);
 
   return (
-    <div className="bg-white max-w-2xl mx-auto">
-      <div className="absolute text-white p-2">
+    <div className="mx-auto max-w-2xl bg-white">
+      <div className="absolute p-2 text-white">
         <BackButton />
       </div>
       <Image
@@ -28,10 +28,10 @@ export default async function Page(props: Props) {
         width={1080}
         quality={100}
         priority
-        className="w-full object-cover aspect-video"
+        className="aspect-video w-full object-cover"
       />
       <div>
-        <div className="flex justify-between border-b p-5 items-end xl:p-10">
+        <div className="flex items-end justify-between border-b p-5 xl:p-10">
           <span>
             Episode {episode.episode} — {episode.releaseDate}
           </span>{' '}

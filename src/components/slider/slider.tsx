@@ -40,12 +40,12 @@ export const Slider = (props: Props) => {
 
   return (
     <div
-      className={`${styles.slider} h-full w-full flex flex-col`}
+      className={`${styles.slider} flex h-full w-full flex-col`}
       style={{ '--item-index': state.currentSlideIndex } as CSSProperties}
       ref={sliderRef}
     >
       <div
-        className={`${styles.slides} flex text-white transition-transform mb-6`}
+        className={`${styles.slides} mb-6 flex text-white transition-transform`}
       >
         {items.map((item, index) => (
           <Slide
@@ -56,7 +56,7 @@ export const Slider = (props: Props) => {
         ))}
       </div>
 
-      <div className="flex justify-end pr-5 text-white pb-7">
+      <div className="flex justify-end pb-7 pr-5 text-white">
         <button
           aria-label="Slide Left"
           onClick={handleSlideLeft}
@@ -91,7 +91,7 @@ const Slide = (props: SlideProps) => {
       href={`/episode/${item.id}`}
       className={`${styles.slide} shrink-0 grow-0 pr-6`}
     >
-      <div className="absolute w-7 h-7 bg-white flex justify-center items-center text-black font-bold">
+      <div className="absolute flex h-7 w-7 items-center justify-center bg-white font-bold text-black">
         {item.episode}
       </div>
 
@@ -104,7 +104,7 @@ const Slide = (props: SlideProps) => {
         priority={isPriority}
         className="mb-5 aspect-[3/2] w-full object-cover"
       />
-      <h3 className="mb-2 font-bold text-ellipsis overflow-hidden whitespace-nowrap">
+      <h3 className="mb-2 overflow-hidden text-ellipsis whitespace-nowrap font-bold">
         {item.title}
       </h3>
       <p className="max-h-[3rem] overflow-hidden text-xs">{item.plot}</p>

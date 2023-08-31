@@ -19,7 +19,7 @@ export const Main = (props: Props) => {
   const [episodesData, setEpisodesData] = useState(episodes);
 
   const handleSearchResultClick = async (
-    result: OMDBSearchResults['Search'][number]
+    result: OMDBSearchResults['Search'][number],
   ) => {
     try {
       // BUG: there seems to be an issue with closing parallel + intercepted route modals
@@ -36,21 +36,21 @@ export const Main = (props: Props) => {
 
   return (
     <main
-      className="bg-slate-500 flex h-screen flex-col bg-cover bg-center bg-no-repeat justify-end overflow-x-hidden"
+      className="flex h-screen flex-col justify-end overflow-x-hidden bg-slate-500 bg-cover bg-center bg-no-repeat"
       style={{
         backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2),rgba(0,0,0,0.8)),url('${seriesData.Poster}')`,
       }}
     >
       <SearchBar onResultClick={handleSearchResultClick} />
 
-      <div className="px-4 py-10 xl:pb-28 text-white xl:pl-24 xl:max-w-2xl">
+      <div className="px-4 py-10 text-white xl:max-w-2xl xl:pb-28 xl:pl-24">
         <p className="mb-2 text-2xl">Season {seasonData.Season}</p>
         <h1 className="mb-1 text-6xl font-bold">{seriesData.Title}</h1>
         <p className="text-xl">{seriesData.Plot}</p>
       </div>
 
       {episodesData && (
-        <div className="px-4 xl:pl-20 lg:h-[35vh]">
+        <div className="px-4 lg:h-[35vh] xl:pl-20">
           <Slider items={episodesData} />
         </div>
       )}
