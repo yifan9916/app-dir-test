@@ -26,7 +26,7 @@ export default async function Page(props: Props) {
       <div className="absolute text-white p-2 lg:hidden">
         <BackButton />
       </div>
-      <div className="rounded bg-white h-full w-full max-w-2xl lg:rounded-none mx-auto flex flex-col">
+      <div className="rounded bg-white h-full w-full max-w-2xl lg:max-w-none lg:rounded-none mx-auto flex flex-col overflow-hidden">
         <Image
           src={episode.img}
           alt={episode.plot}
