@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './slider.module.css';
+import styles from './slider.module.scss';
 
 import { CSSProperties, ElementRef, useRef } from 'react';
 import Image from 'next/image';
