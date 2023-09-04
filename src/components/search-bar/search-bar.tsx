@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 
 import * as Omdb from '@/libs/omdb-api';
 import { OMDBSearchResults } from '@/libs/types';
-import { Search } from '../icons';
+import { useDebounce } from '../utils/use-debounce';
 
 // simple search bar for demoing purposes
 export const SearchBar = ({
@@ -17,17 +17,7 @@ export const SearchBar = ({
   const [searchResults, setSearchResults] =
     useState<OMDBSearchResults['Search']>();
 
-  useEffect(() => {
-    const timerId = setTimeout(() => {
-      if (!input) return;
-
-      setSearchTerm(input);
-    }, 500);
-
-    return () => {
-      clearTimeout(timerId);
-    };
-  }, [input]);
+  useDebounce<string>(input, setSearchTerm);
 
   useEffect(() => {
     if (!searchTerm) return;
@@ -50,24 +40,17 @@ export const SearchBar = ({
   };
 
   return (
-    <div className="absolute top-0 flex flex-col justify-center p-4 lg:block">
-      <div className="relative mb-1">
-        <input
-          type="text"
-          className="w-6 overflow-hidden rounded-full bg-black/50 p-2 pl-8 text-gray-300 outline-none transition-all duration-300 hover:w-auto focus:w-full focus:bg-black/90 focus:pl-10 md:focus:w-auto"
-          onChange={handleChange}
-          value={input}
-        />
-        <Search
-          className="pointer-events-none absolute left-1 top-1 text-white"
-          width="2rem"
-          height="2rem"
-        />
-      </div>
+    <div className="absolute top-0 flex w-full flex-col justify-center p-4">
+      <input
+        type="text"
+        className="mb-1 w-6 rounded-full bg-black/50 bg-[url('/search.svg')] bg-[size:24px] bg-[position:8px_center] bg-no-repeat p-2 pl-8 text-gray-300 outline-none transition-all duration-300 hover:w-full focus:w-full focus:bg-black/90 focus:pl-10 md:hover:w-80 md:focus:w-80"
+        onChange={handleChange}
+        value={input}
+      />
       {searchResults && (
         <ul className="relative z-10 flex flex-col justify-start rounded bg-black/90 text-gray-300">
           {searchResults.map((result) => (
-            <li key={result.imdbID} className="p-3">
+            <li key={result.imdbID} className="p-2">
               <button
                 onClick={() => handleSearchResultClick(result)}
                 className="flex flex-col justify-between text-start"
